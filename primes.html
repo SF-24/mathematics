@@ -1,0 +1,81 @@
+
+<script>
+//noprotect
+function findValue() {
+
+	var n = document.getElementById('fnumber').value ;
+	if(n<1) {
+	  document.getElementById("value").innerHTML = "Error. Value is less than 0";
+	  return;
+	}
+	var	result = 0;
+	var twoToPowerN = 2^n;
+  var invertN = 1/n;
+	
+	for (i = 1; i <= twoToPowerN; i++) {
+		var sum = 0;
+		for (j = 1; j <= i; j++) {
+			sum += 
+            Math.floor(
+				(Math.cos(
+					(
+						(factorialize(j - 1) + 1)
+					/ j)
+				* Math.PI)) ^ 2
+			);
+		}
+		result += Math.floor((n / sum) ^ invertN);
+	}
+	
+	result++;
+	document.getElementById("value").innerHTML = "Result: " + result;
+
+}
+
+function factorialize(num) {
+  // If num = 0 OR num = 1, the factorial will return 1
+  if (num === 0 || num === 1) return 1;
+
+
+  // We start the FOR loop with i = 4
+  // We decrement i after each iteration
+  for (var i = num - 1; i >= 1; i--) {
+    // We store the value of num at each iteration
+    num = num * i; // or num *= i;
+    /*
+                    num      var i = num - 1       num *= i         i--       i >= 1?
+    1st iteration:   5           4 = 5 - 1         20 = 5 * 4        3          yes  
+    2nd iteration:  20           3 = 4 - 1         60 = 20 * 3       2          yes
+    3rd iteration:  60           2 = 3 - 1        120 = 60 * 2       1          yes  
+    4th iteration: 120           1 = 2 - 1        120 = 120 * 1      0          no            
+    5th iteration: 120               0                120
+    End of the FOR loop
+    */
+  }
+  return num; //120
+}
+</script>
+<html>
+  <head>
+    <style>
+      body {font-family: sans-serrif}
+    </style>
+  </head>
+  <body>
+    <h1>Prime number calculator</h1>
+    <br>
+    <label for="fnumber">Enter prime number value:</label><br>
+
+    <br>
+    <input type="number" id="fnumber" name="fnumber"></input >
+    <br>
+    <button type="button" onclick="findValue()">Calculate!</button>
+    <p id="value">Click to calculate</p>
+    <body style="background-color:white;">
+  </body>
+</html>
+
+
+
+
+
